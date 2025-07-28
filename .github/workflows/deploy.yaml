@@ -1,0 +1,65 @@
+name: Build and Deploy Django Admin with Keyboard Shortcuts Snapshot
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+        pip install git+https://github.com/khanxmetu/django-admin-keyshortcuts.git
+
+    - name: Run migrations
+      run: |
+        source venv/bin/activate
+        python manage.py migrate
+
+    - name: Start Django dev server in background
+      run: |
+        source venv/bin/activate
+        python manage.py runserver 0.0.0.0:8000 &
+        sleep 5
+
+    - name: Run snapshot script
+      run: |
+        chmod +x ./snapshot/backup.sh
+        ./snapshot/backup.sh
+
+    - name: Upload artifact for GitHub Pages
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: ./django_admin_demo_snapshot
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
