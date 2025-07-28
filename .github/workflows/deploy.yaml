@@ -45,7 +45,7 @@ jobs:
     - name: Run snapshot script
       run: |
         chmod +x ./snapshot/backup.sh
-        ./snapshot/backup.sh
+        ./snapshot/backup.sh  || true
 
     - name: Upload artifact for GitHub Pages
       uses: actions/upload-pages-artifact@v3
