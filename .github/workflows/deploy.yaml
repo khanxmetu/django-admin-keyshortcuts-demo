@@ -50,7 +50,7 @@ jobs:
     - name: Upload artifact for GitHub Pages
       uses: actions/upload-pages-artifact@v3
       with:
-        path: ./django_admin_demo_snapshot
+        path: ./django_admin_demo_snapshot/django-admin-keyshortcuts-demo
 
   deploy:
     needs: build
