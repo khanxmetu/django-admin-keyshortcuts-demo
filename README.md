@@ -5,4 +5,4 @@ This is just a sample project for demoing / developing the [django-admin-keyshor
 
 ## Credits
 - Demo site set up by [@knyghty](https://github.com/knyghty/django-admin-demo) for Django development.
-- Site static snapshot script from [django_admin_tests]((https://github.com/thibaudcolas/django_admin_tests/blob/main/snapshot/backup.sh)).
+- Site static snapshot script from [django_admin_tests](https://github.com/thibaudcolas/django_admin_tests/blob/main/snapshot/backup.sh).
