@@ -24,7 +24,7 @@ wget \
 
 wget \
   --no-host-directories \
-  --directory-prefix="snapshot_data/$URL_PREFIX/static/admin/js/vendor/hotkey/hotkey.js" \
+  --directory-prefix="snapshot_data/$URL_PREFIX/static/admin/js/vendor/hotkey" \
   --load-cookies "$COOKIES" \
   "$HOST/$URL_PREFIX/static/admin/js/vendor/hotkey/hotkey.js"
 
