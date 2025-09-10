@@ -1,11 +1,10 @@
 from django.contrib import admin
-from django.urls import include
+from django.conf import settings
 from django.urls import path
-from django.views.debug import default_urlconf
 
 from . import views
 
 urlpatterns = [
-    path("django-admin-keyshortcuts-demo/", admin.site.urls),
     path("", views.redirect_to_admin),
+    path(f'{settings.URL_PREFIX.strip("/")}/', admin.site.urls),
 ]

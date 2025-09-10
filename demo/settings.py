@@ -7,7 +7,9 @@ SECRET_KEY = os.environ.get(
     "SECRET_KEY", "django-insecure-!6gle@=ak78)a3oluuqss-1#(e0xwz2wk*f7kkt=vanw#zhhfy"
 )
 
-DEBUG = os.environ.get("DEBUG", "1").lower() in {"1", "on", "y", "yes", "true"}
+DEBUG = True
+
+URL_PREFIX = os.environ.get("URL_PREFIX", "django-admin-keyshortcuts-demo/main").strip("/")
 
 ALLOWED_HOSTS = []
 if allowed_hosts := os.environ.get("ALLOWED_HOSTS"):
@@ -84,4 +86,4 @@ SITE_ID = 1
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 STATIC_ROOT = BASE_DIR / "static"
-STATIC_URL = "django-admin-keyshortcuts-demo/static/"
+STATIC_URL = URL_PREFIX + "/static/"
