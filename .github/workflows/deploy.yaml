@@ -44,7 +44,7 @@ jobs:
       run: |
         source venv/bin/activate
         if [ -n "${{ inputs.pr_number }}" ]; then
-          export URL_PREFIX="django-admin-keyshortcuts-demo/${{ inputs.pr_number }}"
+          export URL_PREFIX="django-admin-keyshortcuts-demo/pr${{ inputs.pr_number }}"
         fi
         python manage.py runserver 0.0.0.0:8000 &
         sleep 5
@@ -52,7 +52,7 @@ jobs:
     - name: Run snapshot script
       run: |
         if [ -n "${{ inputs.pr_number }}" ]; then
-          export URL_PREFIX="django-admin-keyshortcuts-demo/${{ inputs.pr_number }}"
+          export URL_PREFIX="django-admin-keyshortcuts-demo/pr${{ inputs.pr_number }}"
         fi
         chmod +x ./snapshot/backup.sh
         ./snapshot/backup.sh  || true
@@ -63,4 +63,4 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: gh-pages
         publish_dir: ./snapshot_data/django-admin-keyshortcuts-demo
-        keep_files: true
+        destination_dir: ${{ inputs.pr_number != '' && format('pr{0}', inputs.pr_number) || 'main' }}
