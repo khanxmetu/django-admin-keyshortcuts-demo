@@ -62,5 +62,5 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: gh-pages
-        publish_dir: ./snapshot_data/django-admin-keyshortcuts-demo
+        publish_dir: ./snapshot_data/django-admin-keyshortcuts-demo/${{ inputs.pr_number != '' && format('pr{0}', inputs.pr_number) || 'main' }}
         destination_dir: ${{ inputs.pr_number != '' && format('pr{0}', inputs.pr_number) || 'main' }}
